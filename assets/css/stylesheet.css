@@ -1,0 +1,106 @@
+html, body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 12pt;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+}
+
+textarea {
+  font-family: Monaco, MonoSpace;
+  font-size: 10pt;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  border: none;
+  overflow: auto;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.header {
+  height: 50px;
+  padding-top: 8px;
+  margin-bottom: 0px;
+  background-color: #000;
+}
+
+.main {
+  height: 93vh;
+  margin-bottom: 0px;
+}
+
+.footer {
+  font-size: 10pt;
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 0px;
+  height: 42px;
+  color: #fff;
+  background-color: #333;
+}
+
+.logo {
+  padding-left: 20px;
+  font-size: 16pt;
+  color: #FFF;
+}
+
+.command {
+  padding-right: 20px;
+  text-align: right;
+}
+
+.panel-title {
+  padding-top: 8px !important;
+  padding-left: 8px !important;
+  height: 40px;
+  background-color: #e5e5e5;
+}
+
+.input-area {
+  background: url(../img/2cOaJ.png);
+  background-attachment: local;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  padding-left: 35px;
+  padding-top: 12px;
+  border-color: #ccc;
+  line-height: 12pt;
+}
+
+.output-area {
+  background-color: #f7f7f7;
+}
+
+/* Split panels */
+.split {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.gutter {
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+  cursor: col-resize;
+  background-image: url('../img/vertical.png');
+}
+
+.gutter.gutter-vertical {
+  cursor: row-resize;
+  background-image: url('../img/horizontal.png');
+}
+
+.split.split-horizontal, .gutter.gutter-horizontal {
+  height: 100%;
+  float: left;
+}

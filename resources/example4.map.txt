@@ -1,0 +1,248 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix schema: <http://schema.org/>.
+<#Root>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/clinical_study"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:MedicalTrial
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:additionalType;
+      rr:objectMap [ rr:constant "clinicaltrials" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:name;
+      rr:objectMap [ rml:reference "/official_title" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:alternateName;
+      rr:objectMap [ rml:reference "/brief_title" ];
+      rr:objectMap [ rml:reference "/acronym" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:identifier;
+      rr:objectMap [ rml:reference "/id_info/org_study_id" ];
+      rr:objectMap [ rml:reference "/id_info/nct_id" ];
+      rr:objectMap [ rml:reference "/id_info/secondary_id" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:status;
+      rr:objectMap [ rml:reference "/overall_status" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:description;
+      rr:objectMap [ rml:reference "/detailed_description/textblock" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:disambiguatingDescription;
+      rr:objectMap [ rml:reference "/brief_summary/textblock" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:studySubject;
+      rr:objectMap [ rml:reference "/condition" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:code;
+      rr:objectMap [ rr:parentTriplesMap <#Code> ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:phase;
+      rr:objectMap [ rml:reference "/phase" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:trialDesign;
+      rr:objectMap [ rml:reference "/study_design_info/intervention_model" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:population;
+      rr:objectMap [ rml:reference "/eligibility/criteria/textblock" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:sponsor;
+      rr:objectMap [ rr:parentTriplesMap <#LeadSponsor> ];
+      rr:objectMap [ rr:parentTriplesMap <#Collaborator> ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:studyLocation;
+      rr:objectMap [ rr:parentTriplesMap <#Facility> ];
+      rr:objectMap [ rr:parentTriplesMap <#Countries> ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:subjectOf;
+      rr:objectMap [ rr:parentTriplesMap <#References> ];
+      rr:objectMap [ rr:parentTriplesMap <#ResultsReference> ];
+      rr:objectMap [ rr:parentTriplesMap <#Link> ]
+   ].
+<#Code>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/clinical_study/keyword"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:MedicalCode
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:codeValue;
+      rr:objectMap [ rml:reference "/." ];
+   ].
+<#LeadSponsor>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/clinical_study/sponsors/lead_sponsor"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:Organization
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:name;
+      rr:objectMap [ rml:reference "/agency" ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:additionalType;
+      rr:objectMap [ rr:constant "Lead Sponsor" ];
+   ].
+<#Collaborator>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/clinical_study/sponsors/collaborator"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:Organization
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:name;
+      rr:objectMap [ rml:reference "/agency" ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:additionalType;
+      rr:objectMap [ rr:constant "Collaborator" ];
+   ].
+<#Facility>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/clinical_study/location/facility"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:AdministrativeArea
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:name;
+      rr:objectMap [ rml:reference "/name" ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:additionalType;
+      rr:objectMap [ rr:constant "Facility" ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:address;
+      rr:objectMap [ rr:parentTriplesMap <#Address> ]
+   ].
+<#Address>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/clinical_study/location/facility/address"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:PostalAddress
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:addressLocality;
+      rr:objectMap [ rml:reference "/city" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:addressRegion;
+      rr:objectMap [ rml:reference "/state" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:postalCode;
+      rr:objectMap [ rml:reference "/zip" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:addressCountry;
+      rr:objectMap [ rml:reference "/country" ]
+   ].
+<#Countries>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/clinical_study/location_countries"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:AdministrativeArea
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:name;
+      rr:objectMap [ rml:reference "/country" ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:additionalType;
+      rr:objectMap [ rr:constant "Country Location" ];
+   ].
+<#References>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/clinical_study/references"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:CreativeWork
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:additionalType;
+      rr:objectMap [ rr:constant "pubmed" ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:identifier;
+      rr:objectMap [ rml:reference "/PMID" ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:alternateName;
+      rr:objectMap [ rml:reference "/citation" ];
+   ].
+<#References>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/clinical_study/results_reference"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:CreativeWork
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:additionalType;
+      rr:objectMap [ rr:constant "pubmed" ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:identifier;
+      rr:objectMap [ rml:reference "/PMID" ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:alternateName;
+      rr:objectMap [ rml:reference "/citation" ];
+   ].
+<#Link>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/clinical_study/link"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:WebPage
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:url;
+      rr:objectMap [ rml:reference "/url" ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:description;
+      rr:objectMap [ rml:reference "/description" ];
+   ].

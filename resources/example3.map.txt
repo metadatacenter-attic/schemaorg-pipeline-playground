@@ -1,0 +1,135 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix schema: <http://schema.org/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix db: <http://bio2rdf.org/drugbank_vocabulary:>.
+@prefix bio2rdf: <http://bio2rdf.org/bio2rdf_vocabulary:>.
+<#Root>
+   rml:logicalSource [
+      rml:source "";
+   ];
+   rr:subjectMap [
+      rr:constant "http://bio2rdf.org/drugbank:DB00001";
+      rr:class schema:Drug
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:name;
+      rr:objectMap [ rml:reference "/dcterms:title" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:description;
+      rr:objectMap [ rml:reference "/dcterms:description" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:identifier;
+      rr:objectMap [ rml:reference "/dcterms:identifier" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:url;
+      rr:objectMap [ rml:reference "/bio2rdf:uri" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:sameAs;
+      rr:objectMap [ rml:reference "/rdfs:seeAlso" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:proprietaryName;
+      rr:objectMap [ rml:reference "/db:brand/dcterms:title" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:nonProprietaryName;
+      rr:objectMap [ rml:reference "/db:synonym/dcterms:title" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:clinicalPharmacology;
+      rr:objectMap [ rml:reference "/db:pharmacodynamics/dcterms:description" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:drugClass;
+      rr:objectMap [ rml:reference "/db:category/dcterms:title" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:administrationRoute;
+      rr:objectMap [ rml:reference "/db:dosage/db:route/dcterms:title" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:administrationForm;
+      rr:objectMap [ rml:reference "/db:dosage/db:form/dcterms:title" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:mechanismOfAction;
+      rr:objectMap [ rml:reference "/db:mechanism-of-action/dcterms:description" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:interactingDrug;
+      rr:objectMap [ rml:reference "/db:ddi-interactor-in/dcterms:title" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:foodWarning;
+      rr:objectMap [ rml:reference "/db:food-interaction/rdf:value" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:legalStatus;
+      rr:objectMap [ rml:reference "/db:group/bio2rdf:identifier" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:drugCost;
+      rr:objectMap [ rr:parentTriplesMap <#DrugCost> ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:availableStrength;
+      rr:objectMap [ rr:parentTriplesMap <#AvailableStrength> ];
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:manufacturer;
+      rr:objectMap [ rr:parentTriplesMap <#Manufacturer> ];
+   ].
+<#DrugCost>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/db:product"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:DrugCost
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:costPerUnit;
+      rr:objectMap [ rml:reference "/db:price" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:costCurrency;
+      rr:objectMap [ rr:constant "USD" ]
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:drugUnit;
+      rr:objectMap [ rml:reference "/dcterms:title" ]
+   ].
+<#AvailableStrength>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/db:dosage"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:DrugStrength
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:description;
+      rr:objectMap [ rml:reference "/dcterms:title" ]
+   ].
+<#Manufacturer>
+   rml:logicalSource [
+      rml:source "";
+      rml:iterator "/db:manufacturer"
+   ];
+   rr:subjectMap [
+      rr:template "";
+      rr:class schema:Organization
+   ];
+   rr:predicateObjectMap [
+      rr:predicate schema:name;
+      rr:objectMap [ rml:reference "/rdf:value" ]
+   ].

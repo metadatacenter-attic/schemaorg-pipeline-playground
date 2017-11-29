@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF8">
+  <title>Schema.org Pipeline Playground</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"
+      media="screen,projection">
+  <link type="text/css" rel="stylesheet" href="assets/css/material-icons.css"
+      media="screen,projection">
+  <link type="text/css" rel="stylesheet" href="assets/css/stylesheet.css"
+      media="screen,projection">
+  <script type="text/javascript" src="assets/libs/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="assets/libs/materialize.min.js"></script>
+  <script type="text/javascript" src="assets/libs/split.min.js"></script>
+  <script name="cboFastBikes">
+    $(document).ready(function () {
+      $('#reset').click(function() {
+        $('#mapping-input').val("");
+        $('#language-type').val("");
+        $('#datasource-input').val("");
+        $('#datasource-type').val("");
+        $('#translation-output').val("");
+        $('#schema-output').val("");
+        $('#html-output').val("");
+      });
+      $('#run').click(function() {
+        jQuery.support.cors = true;
+        var payload_object = {
+          mapping: {
+            language: $('#language-type').val(),
+            value: $('#mapping-input').val()
+          },
+          dataSource: {
+            type: $('#datasource-type').val(),
+            value: $('#datasource-input').val()
+          }
+        }
+        var payload = JSON.stringify(payload_object)
+        $.ajax(
+          {
+            type: "POST",
+            url: "http://localhost:8080/pipeline/map2query",
+            data: payload,
+            contentType: "application/json; charset=utf-8",
+            dataType: "text",
+            success: function (data) {
+              $('#translation-output').val(data);
+            },
+            error: function (msg, url, line) {
+              alert('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+            }
+          });
+        $.ajax(
+          {
+            type: "POST",
+            url: "http://localhost:8080/pipeline/data2schema",
+            data: payload,
+            contentType: "application/json; charset=utf-8",
+            dataType: "text",
+            success: function (data) {
+              var pretty_data = JSON.stringify(JSON.parse(data), undefined, 2);
+              $('#schema-output').val(pretty_data);
+            },
+            error: function (msg, url, line) {
+              alert('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+            }
+          });
+        $.ajax(
+          {
+            type: "POST",
+            url: "http://localhost:8080/pipeline/data2html",
+            data: payload,
+            contentType: "application/json; charset=utf-8",
+            dataType: "text",
+            success: function (data) {
+              $('#html-output').val(data);
+            },
+            error: function (msg, url, line) {
+              alert('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+            }
+          });
+      });
+    });
+</script>
+</head>
+
+<body ng-app="schemaorg-pipeline-playground">
+  <form>
+    <!-- Header -->
+    <div class="header row">
+      <div class="col s12 m4 l4 logo">Schema.org Pipeline Playground</div>
+      <div class="col s12 m8 l8 command">
+        <a id="examples-dropdown" class="dropdown-button btn-flat white" href="#"
+          data-activates="dropdown-content" data-constrainwidth="false" style="height:33px;">Try Examples</a>
+        <ul id="dropdown-content" class="dropdown-content">
+          <li><a id="example1" class="black-text" href="#!">DrugBank SPARQL endpoint for Lepirudin</a></li>
+          <li><a id="example2" class="black-text" href="#!">ClinicalTrials.gov XML document</a></li>
+          <li><a id="example3" class="black-text" href="#!">RML: DrugBank SPARQL endpoint for Lepirudin</a></li>
+          <li><a id="example4" class="black-text" href="#!">RML: ClinicalTrials.gov XML document</a></li>
+        </ul>
+        <button id="reset" class="btn-flat waves-effect waves-light white" type="submit" style="height:33px;">
+          Reset<i class="material-icons right">refresh</i>
+        </button>
+        <button id="run" class="btn-flat waves-effect waves-light white" type="submit" style="height:33px;">
+          Run<i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main section -->
+    <div class="main row">
+      <div id="top" class="split">
+        <div id="top-left" class="mapping-panel split split-horizontal">
+          <div>
+            <div class="col s12 m9 l9 panel-title">Mapping</div>
+            <div class="col s12 m3 l3 panel-title">
+              <select id="language-type" class="browser-default" style="height:25px;">
+                <option value="">Select language</option>
+                <option value="caml">CAML</option>
+                <option value="rml">RML</option>
+              </select>
+            </div>
+          </div>
+          <textarea id="mapping-input" class="input-area"></textarea>
+        </div>
+        <div id="top-right" class="datasource-panel split split-horizontal">
+          <div>
+            <div class="col s12 m10 l10 panel-title">Data Source</div>
+            <div class="col s12 m2 l2 panel-title">
+              <select id="datasource-type" class="browser-default" style="height:25px;">
+                <option value="">Select source type</option>
+                <option value="sparql-endpoint">SPARQL-Endpoint</option>
+                <option value="xml">XML</option>
+              </select>
+            </div>
+          </div>
+          <textarea id="datasource-input" class="input-area"></textarea>
+        </div>
+      </div>
+      <div id="bottom" class="split">
+        <div id="bottom-left" class="translation-panel split split-horizontal">
+          <div class="panel-title">Mapping Translation</div>
+          <textarea id="translation-output" class="output-area" disabled></textarea>
+        </div>
+        <div id="bottom-center" class="schema-panel split split-horizontal">
+          <div class="panel-title">Schema.org Annotation</div>
+          <textarea id="schema-output" class="output-area" disabled></textarea>
+        </div>
+        <div id="bottom-right" class="html-panel split split-horizontal">
+          <div class="panel-title">HTML Page</div>
+          <textarea id="html-output" class="output-area" disabled></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer row">
+      Schema.org Pipeline Playground developed as part of the <a href="https://metadatacenter.org/">CEDAR</a> supplement project (cc) 2017
+    </br/>
+    </div>
+  </form>
+</body>
+<script type="text/javascript">
+Split(['#top', '#bottom'], {
+    direction: 'vertical',
+    sizes: [40, 60],
+    gutterSize: 8,
+    cursor: 'col-resize'
+  })
+  Split(['#top-left', '#top-right'], {
+    sizes: [33, 67],
+    gutterSize: 8,
+    cursor: 'row-resize'
+  })
+  Split(['#bottom-left', '#bottom-center', '#bottom-right'], {
+    sizes: [33, 34, 33],
+    gutterSize: 8,
+    cursor: 'row-resize'
+  })
+</script>
+<script type="text/javascript">
+  /* Input Strings for Example 1 */
+  $('#example1').on("click", function() {
+    var mapping = $.get('resources/example1.map.txt');
+    var datasource = $.get('resources/example1.data.txt');
+    $.when(mapping, datasource).done(function(mapping_data, datasource_data) {
+      $('#language-type').val("caml");
+      $('#mapping-input').val(mapping_data[0].trim());
+      $('#datasource-type').val("sparql-endpoint");
+      $('#datasource-input').val(datasource_data[0].trim());
+    });
+  });
+  /* Input Strings for Example 2 */
+  $('#example2').on("click", function() {
+    var mapping = $.get('resources/example2.map.txt');
+    var datasource = $.get('resources/example2.data.txt');
+    $.when(mapping, datasource).done(function(mapping_data, datasource_data) {
+      $('#language-type').val("caml");
+      $('#mapping-input').val(mapping_data[0].trim());
+      $('#datasource-type').val("xml");
+      $('#datasource-input').val(datasource_data[0].trim());
+    });
+  });
+  /* Input Strings for Example 3 */
+  $('#example3').on("click", function() {
+    var mapping = $.get('resources/example3.map.txt');
+    var datasource = $.get('resources/example3.data.txt');
+    $.when(mapping, datasource).done(function(mapping_data, datasource_data) {
+      $('#language-type').val("rml");
+      $('#mapping-input').val(mapping_data[0].trim());
+      $('#datasource-type').val("sparql-endpoint");
+      $('#datasource-input').val(datasource_data[0].trim());
+    });
+  });
+  /* Input Strings for Example 4 */
+  $('#example4').on("click", function() {
+    var mapping = $.get('resources/example4.map.txt');
+    var datasource = $.get('resources/example4.data.txt');
+    $.when(mapping, datasource).done(function(mapping_data, datasource_data) {
+      $('#language-type').val("rml");
+      $('#mapping-input').val(mapping_data[0].trim());
+      $('#datasource-type').val("xml");
+      $('#datasource-input').val(datasource_data[0].trim());
+    });
+  });
+</script>
+</html>
