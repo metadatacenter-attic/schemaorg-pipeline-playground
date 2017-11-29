@@ -149,7 +149,12 @@
           <textarea id="schema-output" class="output-area" disabled></textarea>
         </div>
         <div id="bottom-right" class="html-panel split split-horizontal">
-          <div class="panel-title">HTML Page</div>
+          <div class="col s12 m10 l10 panel-title">HTML Source</div>
+          <div class="col s12 m2 l2 panel-title">
+            <a href="#!" id="render" class="right" title="Open a preview window">
+              <i class="material-icons black-text" style="font-size:1.5rem;">open_in_new</i>
+            </a>
+          </div>
           <textarea id="html-output" class="output-area" disabled></textarea>
         </div>
       </div>
@@ -162,6 +167,13 @@
     </div>
   </form>
 </body>
+<script type="text/javascript">
+  $("#render").click(function () {
+  var html = $("#html-output").val();
+  var htmlWindow = window.open("", "htmlOutputWindow", "width=1200,height=1000");
+  htmlWindow.document.write(html);
+});
+</script>
 <script type="text/javascript">
 Split(['#top', '#bottom'], {
     direction: 'vertical',
