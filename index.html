@@ -114,8 +114,8 @@
       <div id="top" class="split">
         <div id="top-left" class="mapping-panel split split-horizontal">
           <div>
-            <div class="col s12 m9 l9 panel-title">Mapping</div>
-            <div class="col s12 m3 l3 panel-title">
+            <div class="col s12 m8 l8 panel-title">Mapping</div>
+            <div class="col s12 m4 l4 panel-title">
               <select id="language-type" class="browser-default" style="height:25px;">
                 <option value="">Select language</option>
                 <option value="caml">CAML</option>
@@ -127,8 +127,8 @@
         </div>
         <div id="top-right" class="datasource-panel split split-horizontal">
           <div>
-            <div class="col s12 m10 l10 panel-title">Data Source</div>
-            <div class="col s12 m2 l2 panel-title">
+            <div class="col s12 m8 l8 panel-title">Data Source</div>
+            <div class="col s12 m4 l4 panel-title">
               <select id="datasource-type" class="browser-default" style="height:25px;">
                 <option value="">Select source type</option>
                 <option value="sparql-endpoint">SPARQL-Endpoint</option>
@@ -170,7 +170,7 @@ Split(['#top', '#bottom'], {
     cursor: 'col-resize'
   })
   Split(['#top-left', '#top-right'], {
-    sizes: [33, 67],
+    sizes: [50, 50],
     gutterSize: 8,
     cursor: 'row-resize'
   })
