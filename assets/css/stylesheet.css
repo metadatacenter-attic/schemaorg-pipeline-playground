@@ -60,6 +60,10 @@ textarea {
   background-color: #e5e5e5;
 }
 
+.panel {
+  width: 100%;
+}
+
 .input-area {
   background: url(../img/2cOaJ.png);
   background-attachment: local;

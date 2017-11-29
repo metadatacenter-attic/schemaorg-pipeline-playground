@@ -14,8 +14,10 @@
   <script type="text/javascript" src="assets/libs/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="assets/libs/materialize.min.js"></script>
   <script type="text/javascript" src="assets/libs/split.min.js"></script>
-  <script name="cboFastBikes">
+  <script type="text/javascript">
     $(document).ready(function () {
+      $('#translation-panel').hide();
+      $('#html-panel').hide();
       $('#reset').click(function() {
         $('#mapping-input').val("");
         $('#language-type').val("");
@@ -24,6 +26,7 @@
         $('#translation-output').val("");
         $('#schema-output').val("");
         $('#html-output').val("");
+        splitPanels.setSizes([33.3,33.3,33.3]);
       });
       $('#run').click(function() {
         jQuery.support.cors = true;
@@ -111,51 +114,62 @@
 
     <!-- Main section -->
     <div class="main row">
-      <div id="top" class="split">
-        <div id="top-left" class="mapping-panel split split-horizontal">
-          <div>
-            <div class="col s12 m8 l8 panel-title">Mapping</div>
-            <div class="col s12 m4 l4 panel-title">
-              <select id="language-type" class="browser-default" style="height:25px;">
-                <option value="">Select language</option>
-                <option value="caml">CAML</option>
-                <option value="rml">RML</option>
-              </select>
-            </div>
+      <div id="left" class="split split-horizontal">
+        <div>
+          <div class="col s12 m7 l7 panel-title">Mapping</div>
+          <div class="col s12 m5 l5 panel-title">
+            <select id="language-type" class="browser-default" style="height:25px;">
+              <option value="">Select language</option>
+              <option value="caml">CAML</option>
+              <option value="rml">RML</option>
+            </select>
           </div>
-          <textarea id="mapping-input" class="input-area"></textarea>
         </div>
-        <div id="top-right" class="datasource-panel split split-horizontal">
-          <div>
-            <div class="col s12 m8 l8 panel-title">Data Source</div>
-            <div class="col s12 m4 l4 panel-title">
-              <select id="datasource-type" class="browser-default" style="height:25px;">
-                <option value="">Select source type</option>
-                <option value="sparql-endpoint">SPARQL-Endpoint</option>
-                <option value="xml">XML</option>
-              </select>
-            </div>
-          </div>
-          <textarea id="datasource-input" class="input-area"></textarea>
-        </div>
+        <textarea id="mapping-input" class="input-area"></textarea>
       </div>
-      <div id="bottom" class="split">
-        <div id="bottom-left" class="translation-panel split split-horizontal">
+      <div id="center" class="split split-horizontal">
+        <div>
+          <div class="col s12 m7 l7 panel-title">Data Source</div>
+          <div class="col s12 m5 l5 panel-title">
+            <select id="datasource-type" class="browser-default" style="height:25px;">
+              <option value="">Select source type</option>
+              <option value="sparql-endpoint">SPARQL-Endpoint</option>
+              <option value="xml">XML</option>
+            </select>
+          </div>
+        </div>
+        <textarea id="datasource-input" class="input-area"></textarea>
+      </div>
+      <div id="right" class="split split-horizontal">
+        <div id="translation-panel" class="panel split split-horizontal">
           <div class="panel-title">Mapping Translation</div>
           <textarea id="translation-output" class="output-area" disabled></textarea>
         </div>
-        <div id="bottom-center" class="schema-panel split split-horizontal">
+        <div id="schema-panel" class="panel split split-horizontal">
           <div class="panel-title">Schema.org Annotation</div>
           <textarea id="schema-output" class="output-area" disabled></textarea>
         </div>
-        <div id="bottom-right" class="html-panel split split-horizontal">
+        <div id="html-panel" class="panel split split-horizontal">
           <div class="col s12 m10 l10 panel-title">HTML Source</div>
           <div class="col s12 m2 l2 panel-title">
-            <a href="#!" id="render" class="right" title="Open a preview window">
+            <a href="#!" id="render" class="right" title="Open a preview window" onclick="openPreview()">
               <i class="material-icons black-text" style="font-size:1.5rem;">open_in_new</i>
             </a>
           </div>
           <textarea id="html-output" class="output-area" disabled></textarea>
+        </div>
+        <div class="fixed-action-btn horizontal">
+          <a class="btn-floating btn-large red">
+            <i class="large material-icons">visibility</i>
+          </a>
+          <ul>
+            <li><a class="btn-floating black" title="Show mapping translation" onclick="showTranslation()">
+              <i class="material-icons">language</i></a></li>
+            <li><a class="btn-floating black" title="Show schema.org annotation" onclick="showSchema()">
+              <i class="material-icons">format_quote</i></a></li>
+            <li><a class="btn-floating black" title="Show HTML source" onclick=showHtml()>
+              <i class="material-icons">settings_ethernet</i></a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -168,29 +182,34 @@
   </form>
 </body>
 <script type="text/javascript">
-  $("#render").click(function () {
-  var html = $("#html-output").val();
-  var htmlWindow = window.open("", "htmlOutputWindow", "width=1200,height=1000");
-  htmlWindow.document.write(html);
-});
-</script>
-<script type="text/javascript">
-Split(['#top', '#bottom'], {
-    direction: 'vertical',
-    sizes: [40, 60],
+  var splitPanels = Split(['#left', '#center', '#right'], {
+    direction: 'horizontal',
+    sizes: [33.3, 33.3, 33.3],
     gutterSize: 8,
     cursor: 'col-resize'
   })
-  Split(['#top-left', '#top-right'], {
-    sizes: [50, 50],
-    gutterSize: 8,
-    cursor: 'row-resize'
-  })
-  Split(['#bottom-left', '#bottom-center', '#bottom-right'], {
-    sizes: [33, 34, 33],
-    gutterSize: 8,
-    cursor: 'row-resize'
-  })
+</script>
+<script type="text/javascript">
+  function showTranslation() {
+    $('#translation-panel').show();
+    $('#schema-panel').hide();
+    $('#html-panel').hide();
+  }
+  function showSchema() {
+    $('#translation-panel').hide();
+    $('#schema-panel').show();
+    $('#html-panel').hide();
+  }
+  function showHtml() {
+    $('#translation-panel').hide();
+    $('#schema-panel').hide();
+    $('#html-panel').show();
+  }
+  function openPreview() {
+    var html = $("#html-output").val();
+    var htmlWindow = window.open("", "htmlOutputWindow", "width=1200,height=1000");
+    htmlWindow.document.write(html);
+  }
 </script>
 <script type="text/javascript">
   /* Input Strings for Example 1 */
