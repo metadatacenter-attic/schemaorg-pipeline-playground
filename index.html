@@ -26,6 +26,9 @@
         $('#translation-output').val("");
         $('#schema-output').val("");
         $('#html-output').val("");
+        $('#translation-panel').hide();
+        $('#schema-panel').show();
+        $('#html-panel').hide();
         splitPanels.setSizes([33.3,33.3,33.3]);
       });
       $('#run').click(function() {
