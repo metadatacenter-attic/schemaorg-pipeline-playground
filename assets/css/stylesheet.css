@@ -40,18 +40,8 @@ textarea {
 }
 
 .main {
-  height: 92vh;
+  height: 96vh;
   margin-bottom: 0px;
-}
-
-.footer {
-  font-size: 10pt;
-  text-align: center;
-  padding-top: 10px;
-  margin-bottom: 0px;
-  height: 42px;
-  color: #fff;
-  background-color: #333;
 }
 
 .logo {
