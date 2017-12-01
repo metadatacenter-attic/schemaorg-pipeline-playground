@@ -75,7 +75,7 @@
       rr:objectMap [ rml:reference "/db:group/bio2rdf:identifier" ]
    ];
    rr:predicateObjectMap [
-      rr:predicate schema:drugCost;
+      rr:predicate schema:cost;
       rr:objectMap [ rr:parentTriplesMap <#DrugCost> ];
    ];
    rr:predicateObjectMap [
