@@ -18,6 +18,7 @@
     $(document).ready(function () {
       $('#translation-panel').hide();
       $('#html-panel').hide();
+      $('#url-input').hide();
       $('#reset').click(function() {
         $('#mapping-input').val("");
         $('#language-type').val("");
@@ -29,18 +30,24 @@
         $('#translation-panel').hide();
         $('#schema-panel').show();
         $('#html-panel').hide();
+        $('#url-input').hide();
         splitPanels.setSizes([33.3,33.3,33.3]);
       });
       $('#run').click(function() {
         jQuery.support.cors = true;
+        var datasource_type = $('#datasource-type').val();
+        var datasource_input = $('#datasource-input').val();
+        if (datasource_type == "sparql-endpoint") {
+          datasource_input = $('#url-input').val();
+        }
         var payload_object = {
           mapping: {
             language: $('#language-type').val(),
             value: $('#mapping-input').val()
           },
           dataSource: {
-            type: $('#datasource-type').val(),
-            value: $('#datasource-input').val()
+            type: datasource_type,
+            value: datasource_input
           }
         }
         var payload = JSON.stringify(payload_object)
@@ -123,6 +130,32 @@
     <div class="main row">
       <div id="left" class="split split-horizontal">
         <div>
+          <div class="col s12 m7 l7 panel-title">Data Source</div>
+          <div class="col s12 m5 l5 panel-title">
+            <select id="datasource-type" class="browser-default" style="height:25px;">
+              <option value="">Select source type</option>
+              <option value="sparql-endpoint">SPARQL-Endpoint</option>
+              <option value="xml">XML</option>
+            </select>
+            <script type="text/javascript">
+              $('#datasource-type').change(function() {
+                var type_selection = $('#datasource-type').val();
+                if (type_selection == "sparql-endpoint") {
+                  $('#url-input').show();
+                  $('#datasource-input').hide();
+                } else {
+                  $('#url-input').hide();
+                  $('#datasource-input').show();
+                }
+              });
+            </script>
+          </div>
+        </div>
+        <input id="url-input" placeholder="Type the enpoint address here" type="text">
+        <textarea id="datasource-input" class="input-area"></textarea>
+      </div>
+      <div id="center" class="split split-horizontal">
+        <div>
           <div class="col s12 m7 l7 panel-title">Mapping</div>
           <div class="col s12 m5 l5 panel-title">
             <select id="language-type" class="browser-default" style="height:25px;">
@@ -133,19 +166,6 @@
           </div>
         </div>
         <textarea id="mapping-input" class="input-area"></textarea>
-      </div>
-      <div id="center" class="split split-horizontal">
-        <div>
-          <div class="col s12 m7 l7 panel-title">Data Source</div>
-          <div class="col s12 m5 l5 panel-title">
-            <select id="datasource-type" class="browser-default" style="height:25px;">
-              <option value="">Select source type</option>
-              <option value="sparql-endpoint">SPARQL-Endpoint</option>
-              <option value="xml">XML</option>
-            </select>
-          </div>
-        </div>
-        <textarea id="datasource-input" class="input-area"></textarea>
       </div>
       <div id="right" class="split split-horizontal">
         <div id="translation-panel" class="panel split split-horizontal">
@@ -221,7 +241,9 @@
       $('#language-type').val("caml");
       $('#mapping-input').val(mapping_data[0].trim());
       $('#datasource-type').val("sparql-endpoint");
-      $('#datasource-input').val(datasource_data[0].trim());
+      $('#url-input').val(datasource_data[0].trim());
+      $('#url-input').show();
+      $('#datasource-input').hide();
     });
   });
   /* Input Strings for Example 2 */
@@ -233,6 +255,8 @@
       $('#mapping-input').val(mapping_data[0].trim());
       $('#datasource-type').val("xml");
       $('#datasource-input').val(datasource_data[0].trim());
+      $('#url-input').hide();
+      $('#datasource-input').show();
     });
   });
   /* Input Strings for Example 3 */
@@ -243,7 +267,9 @@
       $('#language-type').val("rml");
       $('#mapping-input').val(mapping_data[0].trim());
       $('#datasource-type').val("sparql-endpoint");
-      $('#datasource-input').val(datasource_data[0].trim());
+      $('#url-input').val(datasource_data[0].trim());
+      $('#url-input').show();
+      $('#datasource-input').hide();
     });
   });
   /* Input Strings for Example 4 */
@@ -255,6 +281,8 @@
       $('#mapping-input').val(mapping_data[0].trim());
       $('#datasource-type').val("xml");
       $('#datasource-input').val(datasource_data[0].trim());
+      $('#url-input').hide();
+      $('#datasource-input').show();
     });
   });
 </script>
