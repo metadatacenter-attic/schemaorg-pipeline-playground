@@ -98,6 +98,7 @@
               alert(errorResponse.message);
             }
           });
+        return false;
       });
     });
 </script>
@@ -109,16 +110,16 @@
     <div class="header row">
       <div class="col s12 m4 l4 logo">Schema.org Pipeline Playground</div>
       <div class="col s12 m8 l8 command">
-        <a id="examples-dropdown" class="dropdown-button btn-flat btn-word white-text" href="#!"
+        <a id="examples-dropdown" class="dropdown-button btn-flat btn-word white-text"
           data-activates="dropdown-content" data-constrainwidth="false">Try Examples</a>
         <ul id="dropdown-content" class="dropdown-content">
-          <li><a id="example1" class="dropdown-item black-text" href="#!">
+          <li><a id="example1" class="dropdown-item black-text">
             Annotate DrugBank RDF data (Language: CAML)</a></li>
-          <li><a id="example2" class="dropdown-item black-text" href="#!">
+          <li><a id="example2" class="dropdown-item black-text">
             Annotate ClinicalTrials.gov XML document (Language: CAML)</a></li>
-          <li><a id="example3" class="dropdown-item black-text" href="#!">
+          <li><a id="example3" class="dropdown-item black-text">
             Annotate DrugBank RDF data (Language: RML)</a></li>
-          <li><a id="example4" class="dropdown-item black-text" href="#!">
+          <li><a id="example4" class="dropdown-item black-text">
             Annotate ClinicalTrials.gov XML document (Language: RML)</a></li>
         </ul>
         <button id="reset" class="btn-flat btn-icon waves-effect waves-light green-text" type="submit">
@@ -183,7 +184,7 @@
         <div id="html-panel" class="panel split split-horizontal">
           <div class="col s12 m10 l10 panel-title">HTML Source</div>
           <div class="col s12 m2 l2 panel-title">
-            <a href="#!" id="render" class="right" title="Open a preview window" onclick="openPreview()">
+            <a id="render" class="right" title="Open a preview window" onclick="openPreview()">
               <i class="material-icons black-text" style="font-size:1.5rem;">open_in_new</i>
             </a>
           </div>
