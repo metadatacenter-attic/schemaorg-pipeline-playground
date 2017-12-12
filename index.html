@@ -55,43 +55,17 @@
         $.ajax(
           {
             type: "POST",
-            url: "http://"+SERVER_HOSTNAME+"/pipeline/map2query",
+            url: "http://"+SERVER_HOSTNAME+"/pipeline/end2end",
             data: payload,
             contentType: "application/json; charset=utf-8",
             dataType: "text",
             success: function (data) {
-              $('#translation-output').val(data);
-            },
-            error: function (msg, url, line) {
-              const errorResponse = JSON.parse(msg.responseText);
-              alert(errorResponse.message);
-            }
-          });
-        $.ajax(
-          {
-            type: "POST",
-            url: "http://"+SERVER_HOSTNAME+"/pipeline/data2schema",
-            data: payload,
-            contentType: "application/json; charset=utf-8",
-            dataType: "text",
-            success: function (data) {
-              var pretty_data = JSON.stringify(JSON.parse(data), undefined, 2);
-              $('#schema-output').val(pretty_data);
-            },
-            error: function (msg, url, line) {
-              const errorResponse = JSON.parse(msg.responseText);
-              alert(errorResponse.message);
-            }
-          });
-        $.ajax(
-          {
-            type: "POST",
-            url: "http://"+SERVER_HOSTNAME+"/pipeline/data2html",
-            data: payload,
-            contentType: "application/json; charset=utf-8",
-            dataType: "text",
-            success: function (data) {
-              $('#html-output').val(data);
+              var responseData = JSON.parse(data);
+              $('#translation-output').val(responseData.query);
+              $('#schema-output').val(
+                JSON.stringify(JSON.parse(responseData.schema),
+                undefined, 2));
+              $('#html-output').val(responseData.html);
             },
             error: function (msg, url, line) {
               const errorResponse = JSON.parse(msg.responseText);
