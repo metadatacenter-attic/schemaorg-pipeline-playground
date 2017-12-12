@@ -15,7 +15,7 @@
   <script type="text/javascript" src="assets/libs/materialize.min.js"></script>
   <script type="text/javascript" src="assets/libs/split.min.js"></script>
   <script type="text/javascript">
-    const SERVER_HOSTNAME = "localhost";
+    const SERVER_HOSTNAME = "localhost:8080";
     $(document).ready(function () {
       $('#translation-panel').hide();
       $('#html-panel').hide();
@@ -63,7 +63,8 @@
               $('#translation-output').val(data);
             },
             error: function (msg, url, line) {
-              alert('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+              const errorResponse = JSON.parse(msg.responseText);
+              alert(errorResponse.message);
             }
           });
         $.ajax(
@@ -78,7 +79,8 @@
               $('#schema-output').val(pretty_data);
             },
             error: function (msg, url, line) {
-              alert('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+              const errorResponse = JSON.parse(msg.responseText);
+              alert(errorResponse.message);
             }
           });
         $.ajax(
@@ -92,7 +94,8 @@
               $('#html-output').val(data);
             },
             error: function (msg, url, line) {
-              alert('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+              const errorResponse = JSON.parse(msg.responseText);
+              alert(errorResponse.message);
             }
           });
       });
