@@ -80,7 +80,7 @@
 <#Code>
    rml:logicalSource [
       rml:source "";
-      rml:iterator "/clinical_study/keyword"
+      rml:iterator "/clinical_study/condition_browse"
    ];
    rr:subjectMap [
       rr:template "";
@@ -88,7 +88,11 @@
    ];
    rr:predicateObjectMap [
       rr:predicate schema:codeValue;
-      rr:objectMap [ rml:reference "/." ];
+      rr:objectMap [ rml:reference "/mesh_term" ];
+   ];
+   rr:predicateObjectMap [
+     rr:predicate schema:codingSystem;
+     rr:objectMap [ rr:constant "MeSH" ]
    ].
 <#LeadSponsor>
    rml:logicalSource [
