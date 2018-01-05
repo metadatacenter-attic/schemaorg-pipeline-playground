@@ -1,0 +1,6 @@
+@type:          Dataset
+distribution:   /Dataset/Distributions/Distribution
+   @type:       DataDownload
+   contentUrl:  /AccessUrl
+   fileFormat:  /Format
+   publisher:   /Source

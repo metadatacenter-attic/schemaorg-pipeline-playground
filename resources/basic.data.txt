@@ -1,0 +1,37 @@
+<Dataset>
+  <Title>Expression data from rat bladder cancer</Title>
+  <Description>
+    In the development and progression of bladder
+    cancer, there are many genetic changes.
+  </Description>
+  <Identifier>E-GEOD-76702</Identifier>
+  <SecondaryIdentifier>76702</SecondaryIdentifier>
+  <Keywords>
+    <Keyword>functional genomics</Keyword>
+  </Keywords>
+  <DateReleased>01-12-2016</DateReleased>
+  <DateModified>01-16-2016</DateModified>
+  <Distributions>
+    <Distribution>
+      <AccessUrl>
+        https://portal.org/d/76702.raw.zip
+      </AccessUrl>
+      <Format>txt</Format>
+      <Source>PortalExpress</Source>
+    </Distribution>
+    <Distribution>
+      <AccessUrl>
+        https://portal.org/d/76702.processed.zip
+      </AccessUrl>
+      <Format>txt</Format>
+      <Source>PortalExpress</Source>
+    </Distribution>
+    <Distribution>
+      <AccessUrl>
+        https://examples.org/q?acc=GSE76702
+      </AccessUrl>
+      <Format>html</Format>
+      <Source>Gene Example Omnibus</Source>
+    </Distribution>
+  </Distributions>
+</Dataset>

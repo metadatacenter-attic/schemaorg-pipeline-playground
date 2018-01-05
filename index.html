@@ -87,6 +87,15 @@
         <a id="examples-dropdown" class="dropdown-button btn-flat btn-word white-text"
           data-activates="dropdown-content" data-constrainwidth="false">Try Examples</a>
         <ul id="dropdown-content" class="dropdown-content">
+          <li><a id="datapath" class="dropdown-item black-text">
+            Basic CAML: Data Path</a></li>
+          <li><a id="dataobject" class="dropdown-item black-text">
+            Basic CAML: Data Object</a></li>
+          <li><a id="dataarray" class="dropdown-item black-text">
+            Basic CAML: Data Array</a></li>
+          <li><a id="constant" class="dropdown-item black-text">
+            Basic CAML: Constant Assignment</a></li>
+          <hr/>
           <li><a id="example1" class="dropdown-item black-text">
             Annotate DrugBank RDF data (Language: CAML)</a></li>
           <li><a id="example2" class="dropdown-item black-text">
@@ -212,6 +221,70 @@
   }
 </script>
 <script type="text/javascript">
+  /* Input Strings for Data Path notation */
+  $('#datapath').on("click", function() {
+    var mapping = $.get('resources/datapath.map.txt');
+    var datasource = $.get('resources/basic.data.txt');
+    $.when(mapping, datasource).done(function(mapping_data, datasource_data) {
+      $('#language-type').val("caml");
+      $('#mapping-input').val(mapping_data[0].trim());
+      $('#datasource-type').val("xml");
+      $('#datasource-input').val(datasource_data[0].trim());
+      $('#url-input').hide();
+      $('#datasource-input').show();
+      $('#translation-output').val("");
+      $('#schema-output').val("");
+      $('#html-output').val("");
+    });
+  });
+  /* Input Strings for Data Object notation */
+  $('#dataobject').on("click", function() {
+    var mapping = $.get('resources/dataobject.map.txt');
+    var datasource = $.get('resources/basic.data.txt');
+    $.when(mapping, datasource).done(function(mapping_data, datasource_data) {
+      $('#language-type').val("caml");
+      $('#mapping-input').val(mapping_data[0].trim());
+      $('#datasource-type').val("xml");
+      $('#datasource-input').val(datasource_data[0].trim());
+      $('#url-input').hide();
+      $('#datasource-input').show();
+      $('#translation-output').val("");
+      $('#schema-output').val("");
+      $('#html-output').val("");
+    });
+  });
+  /* Input Strings for Data Array notation */
+  $('#dataarray').on("click", function() {
+    var mapping = $.get('resources/dataarray.map.txt');
+    var datasource = $.get('resources/basic.data.txt');
+    $.when(mapping, datasource).done(function(mapping_data, datasource_data) {
+      $('#language-type').val("caml");
+      $('#mapping-input').val(mapping_data[0].trim());
+      $('#datasource-type').val("xml");
+      $('#datasource-input').val(datasource_data[0].trim());
+      $('#url-input').hide();
+      $('#datasource-input').show();
+      $('#translation-output').val("");
+      $('#schema-output').val("");
+      $('#html-output').val("");
+    });
+  });
+  /* Input Strings for Data Path notation */
+  $('#constant').on("click", function() {
+    var mapping = $.get('resources/constant.map.txt');
+    var datasource = $.get('resources/basic.data.txt');
+    $.when(mapping, datasource).done(function(mapping_data, datasource_data) {
+      $('#language-type').val("caml");
+      $('#mapping-input').val(mapping_data[0].trim());
+      $('#datasource-type').val("xml");
+      $('#datasource-input').val(datasource_data[0].trim());
+      $('#url-input').hide();
+      $('#datasource-input').show();
+      $('#translation-output').val("");
+      $('#schema-output').val("");
+      $('#html-output').val("");
+    });
+  });
   /* Input Strings for Example 1 */
   $('#example1').on("click", function() {
     var mapping = $.get('resources/example1.map.txt');
