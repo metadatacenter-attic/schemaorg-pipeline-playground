@@ -1,4 +1,4 @@
-@type:        Dataset
+@type:        'Dataset'
 name:         /Dataset/Title
 Description:  /Dataset/Description
 Keyword:      /Dataset/Keywords/Keyword

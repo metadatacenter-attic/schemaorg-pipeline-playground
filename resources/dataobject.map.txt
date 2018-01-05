@@ -1,6 +1,6 @@
-@type:          Dataset
+@type:          'Dataset'
 distribution:   /Dataset/Distributions/Distribution
-   @type:       DataDownload
+   @type:       'DataDownload'
    contentUrl:  /AccessUrl
    fileFormat:  /Format
    publisher:   /Source
