@@ -7,9 +7,12 @@ identifier:                  /clinical_study/id_info/secondary_id
 status:                      /clinical_study/overall_status
 description:                 /clinical_study/detailed_description/textblock
 studySubject:                /clinical_study/condition
-code:                        /clinical_study/condition_browse
+code:                        /clinical_study/condition_browse/mesh_term
     @type:                   'MedicalCode'
-    codeValue:               /mesh_term
+    codeValue:               /.
+code:                        /clinical_study/intervention_browse/mesh_term
+    @type:                   'MedicalCode'
+    codeValue:               /.
 phase:                       /clinical_study/phase
 trialDesign:                 /clinical_study/study_design_info/intervention_model
 population:                  /clinical_study/eligibility/criteria/textblock
