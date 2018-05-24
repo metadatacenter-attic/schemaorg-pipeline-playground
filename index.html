@@ -17,6 +17,7 @@
   <script type="text/javascript">
     const SERVER_HOSTNAME = "localhost:8080";
     $(document).ready(function () {
+      $('#spinner-animation').hide();
       $('#translation-panel').hide();
       $('#html-panel').hide();
       $('#url-input').hide();
@@ -59,6 +60,12 @@
             data: payload,
             contentType: "application/json; charset=utf-8",
             dataType: "text",
+            beforeSend: function() {
+              $('#spinner-animation').show();
+            },
+            complete: function() {
+              $('#spinner-animation').hide();
+            },
             success: function (data) {
               var responseData = JSON.parse(data);
               $('#translation-output').val(responseData.query);
@@ -80,6 +87,10 @@
 
 <body ng-app="schemaorg-pipeline-playground">
   <form>
+    <!-- Spinner -->
+    <div id="spinner-animation" class="spinner progress row">
+      <div class="indeterminate"></div>
+    </div>
     <!-- Header -->
     <div class="header row">
       <div class="col s12 m4 l4 logo">Schema.org Pipeline Playground</div>
@@ -113,7 +124,6 @@
         </button>
       </div>
     </div>
-
     <!-- Main section -->
     <div class="main row">
       <div id="left" class="split split-horizontal">
@@ -158,11 +168,15 @@
       <div id="right" class="split split-horizontal">
         <div id="translation-panel" class="panel split split-horizontal">
           <div class="panel-title">Mapping Translation</div>
-          <textarea id="translation-output" class="output-area" disabled></textarea>
+          <div id="spinner-animation">
+            <textarea id="translation-output" class="output-area" disabled></textarea>
+          </div>
         </div>
         <div id="schema-panel" class="panel split split-horizontal">
           <div class="panel-title">Schema.org Annotation</div>
-          <textarea id="schema-output" class="output-area" disabled></textarea>
+          <div id="spinner-animation">
+            <textarea id="schema-output" class="output-area" disabled></textarea>
+          </div>
         </div>
         <div id="html-panel" class="panel split split-horizontal">
           <div class="col s12 m10 l10 panel-title">HTML Source</div>

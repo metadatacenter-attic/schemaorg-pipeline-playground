@@ -52,6 +52,10 @@ input {
   margin-bottom: 0px;
 }
 
+.spinner {
+  margin: 0px
+}
+
 .logo {
   padding-top: 5px !important;
   padding-left: 20px;
