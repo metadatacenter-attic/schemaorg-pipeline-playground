@@ -15,10 +15,6 @@
       rr:objectMap [ rml:reference "/official_title" ]
    ];
    rr:predicateObjectMap [
-      rr:predicate schema:alternateName;
-      rr:objectMap [ rml:reference "/brief_title" ]
-   ];
-   rr:predicateObjectMap [
       rr:predicate schema:identifier;
       rr:objectMap [ rml:reference "/id_info/org_study_id" ];
       rr:objectMap [ rml:reference "/id_info/nct_id" ];
