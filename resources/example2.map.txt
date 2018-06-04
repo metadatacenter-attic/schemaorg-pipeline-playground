@@ -1,6 +1,5 @@
 @type:                       'MedicalTrial'
 name:                        /clinical_study/official_title
-alternateName:               /clinical_study/brief_title
 identifier:                  /clinical_study/id_info/org_study_id
 identifier:                  /clinical_study/id_info/nct_id
 identifier:                  /clinical_study/id_info/secondary_id
@@ -25,7 +24,6 @@ sponsor:                     /clinical_study/sponsors/collaborator
 studyLocation:               /clinical_study/location/facility
     @type:                   'AdministrativeArea'
     name:                    /name
-    additionalType:          'Facility'
     address:                 /address
         @type:               'PostalAddress'
         addressLocality:     /city
