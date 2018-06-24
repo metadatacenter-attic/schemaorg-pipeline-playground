@@ -31,7 +31,7 @@ studyLocation:               /clinical_study/location/facility
         postalCode:          /zip
         addressCountry:      /country
 subjectOf:                   /clinical_study/reference
-    @type:                   'CreativeWork'
+    @type:                   'ScholarlyArticle'
     identifier:              /PMID
     alternateName:           /citation
     url:                     /url

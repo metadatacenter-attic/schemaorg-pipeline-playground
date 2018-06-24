@@ -149,7 +149,7 @@
    ];
    rr:subjectMap [
       rr:template "";
-      rr:class schema:CreativeWork
+      rr:class schema:ScholarlyArticle
    ];
    rr:predicateObjectMap [
       rr:predicate schema:identifier;
