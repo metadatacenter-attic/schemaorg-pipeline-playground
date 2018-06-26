@@ -10,7 +10,6 @@ textarea {
   font-family: Monaco, MonoSpace;
   font-size: 8pt;
   width: 100%;
-  height: 100%;
   resize: none;
   border: none;
   overflow: auto;
@@ -18,6 +17,13 @@ textarea {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+  height: -moz-calc(100vh - 92px);
+  /* WebKit */
+  height: -webkit-calc(100vh - 92px);
+  /* Opera */
+  height: -o-calc(100vh - 92px);
+  /* Standard */
+  height: calc(100vh - 92px);
 }
 
 input {
@@ -48,7 +54,6 @@ input {
 }
 
 .main {
-  height: 96vh;
   margin-bottom: 0px;
 }
 

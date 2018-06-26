@@ -127,41 +127,37 @@
     <!-- Main section -->
     <div class="main row">
       <div id="left" class="split split-horizontal">
-        <div>
-          <div class="col s12 m7 l7 panel-title">Data Source</div>
-          <div class="col s12 m5 l5 panel-title">
-            <select id="datasource-type" class="browser-default" style="height:25px;">
-              <option value="">Select source type</option>
-              <option value="sparql-endpoint">SPARQL-Endpoint</option>
-              <option value="xml">XML</option>
-            </select>
-            <script type="text/javascript">
-              $('#datasource-type').change(function() {
-                var type_selection = $('#datasource-type').val();
-                if (type_selection == "sparql-endpoint") {
-                  $('#url-input').show();
-                  $('#datasource-input').hide();
-                } else {
-                  $('#url-input').hide();
-                  $('#datasource-input').show();
-                }
-              });
-            </script>
-          </div>
+        <div class="col s12 m7 l7 panel-title">Data Source</div>
+        <div class="col s12 m5 l5 panel-title">
+          <select id="datasource-type" class="browser-default" style="height:25px;">
+            <option value="">Select source type</option>
+            <option value="sparql-endpoint">SPARQL-Endpoint</option>
+            <option value="xml">XML</option>
+          </select>
+          <script type="text/javascript">
+            $('#datasource-type').change(function() {
+              var type_selection = $('#datasource-type').val();
+              if (type_selection == "sparql-endpoint") {
+                $('#url-input').show();
+                $('#datasource-input').hide();
+              } else {
+                $('#url-input').hide();
+                $('#datasource-input').show();
+              }
+            });
+          </script>
         </div>
         <input id="url-input" placeholder="Type the enpoint address here" type="text">
         <textarea id="datasource-input" class="input-area"></textarea>
       </div>
       <div id="center" class="split split-horizontal">
-        <div>
-          <div class="col s12 m7 l7 panel-title">Mapping</div>
-          <div class="col s12 m5 l5 panel-title">
-            <select id="language-type" class="browser-default" style="height:25px;">
-              <option value="">Select language</option>
-              <option value="caml">CAML</option>
-              <option value="rml">RML</option>
-            </select>
-          </div>
+        <div class="col s12 m7 l7 panel-title">Mapping</div>
+        <div class="col s12 m5 l5 panel-title">
+          <select id="language-type" class="browser-default" style="height:25px;">
+            <option value="">Select language</option>
+            <option value="caml">CAML</option>
+            <option value="rml">RML</option>
+          </select>
         </div>
         <textarea id="mapping-input" class="input-area"></textarea>
       </div>
